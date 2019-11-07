@@ -5,12 +5,16 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
   },
   "author": "dima",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.4.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.2"
