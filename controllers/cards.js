@@ -30,13 +30,13 @@ module.exports.getAllCards = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.id)
+    // eslint-disable-next-line consistent-return
     .then((card) => {
-      if (!card) return Promise.reject(new Error(`Такой карты нет`));
-      if (JSON.stringify(card.owner) !== JSON.stringify(req.user._id)) return Promise.reject(new Error(`Удалять можно только свои карточки!`));
+      if (!card) return Promise.reject(new Error('Такой карты нет'));
+      if (JSON.stringify(card.owner) !== JSON.stringify(req.user._id)) return Promise.reject(new Error('Удалять можно только свои карточки!'));
       Card.remove(card)
         .then((cardToDelete) => res.send(cardToDelete !== null ? { data: card } : { data: 'Нечего удалять' }))
         .catch(() => { throw new ServerError('Произошла ошибка при удалении карточки'); });
     })
     .catch((err) => next(err.statusCode ? err : new NotFoundError('Такой карты нет')));
 };
-

@@ -9,13 +9,17 @@ const { DEV_SECRET_KEY } = require('./../config');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+// eslint-disable-next-line consistent-return
 module.exports.createUser = (req, res, next) => {
-  console.log(req.body)
-  const { name, about, avatar, email } = req.body;
-  if (req.body.length != 0) {
+  // eslint-disable-next-line no-console
+  console.log(req.body);
+  const {
+    name, about, avatar, email,
+  } = req.body;
+  if (req.body.length !== 0) {
     bcrypt.hash(req.body.password, 10)
-      .then(hash => User.create({
-        name, about, avatar, email, password: hash
+      .then((hash) => User.create({
+        name, about, avatar, email, password: hash,
       }))
       .then((user) => {
         if (!user) {
@@ -25,7 +29,7 @@ module.exports.createUser = (req, res, next) => {
       })
       .catch(next);
   } else {
-    return `Заполните пожалуйста все поля`
+    return 'Заполните пожалуйста все поля';
   }
 };
 
@@ -47,7 +51,7 @@ module.exports.login = (req, res, next) => {
         .send({ message: 'авторизация прошла успешно' })
         .end();
     })
-    .catch(next)
+    .catch(next);
 };
 
 module.exports.getAllUsers = (req, res, next) => {
