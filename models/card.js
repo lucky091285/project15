@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const validate = require('mongoose-validator');
+// const validate = require('mongoose-validator');
+const validate = require('validator');
 
-const urlValidate = validate({
-  validator: 'matches',
-  // eslint-disable-next-line no-useless-escape
-  arguments: '/^((http|https):\/\/)((((\d{1,3}\.){3}(\d{1,3})(:[0-9]{2,5}(\/[A-Za-z\/]+)?)?)$)|((w{3}\.)?[A-Za-z0-9\/]+[.]+(([A-Za-z0-9\/]+)|([A-Za-z]+(\:[0-9]{2,5})?))(#)?$))',
-});
+// const urlValidate = validate({
+//   validator: 'matches',
+//   // eslint-disable-next-line no-useless-escape
+//   arguments: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|jpeg|gif)/,
+// });
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -17,7 +18,10 @@ const cardSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
-    validate: urlValidate,
+    validate: {
+      validator: (v) => validate.isURL(v),
+      message: 'Некорректный адрес ссылки',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
