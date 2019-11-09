@@ -1,18 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-// const validate = require('mongoose-validator');
-const validate = require('validator');
+const validate = require('mongoose-validator');
 
-// const urlValidate = validate({
-//   validator: 'matches',
-//   // eslint-disable-next-line no-useless-escape
-//   arguments: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|jpeg|gif)/,
-// });
-// const mailValidate = validate({
-//   validator: 'matches',
-//   // eslint-disable-next-line no-useless-escape
-//   arguments: /[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]{2,}/,
-// });
+const urlValidate = validate({
+  validator: 'matches',
+  // eslint-disable-next-line no-useless-escape
+  arguments: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png|jpeg|gif)/,
+});
+const mailValidate = validate({
+  validator: 'matches',
+  // eslint-disable-next-line no-useless-escape
+  arguments: /[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]{2,}/,
+});
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -30,19 +29,13 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    validate: {
-      validator: (v) => validate.isURL(v),
-      message: 'Некорректный адрес ссылки',
-    },
+    validate: urlValidate,
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: (v) => validate.isEmail(v),
-      message: 'Некорректный адрес электронной почты',
-    },
+    validate: mailValidate,
   },
   password: {
     type: String,
