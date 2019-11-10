@@ -5,12 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix ."
   },
   "author": "dima",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.4.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.2"
@@ -18,14 +21,17 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "celebrate": "^10.0.1",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-winston": "^4.0.1",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.2",
-    "mongoose": "^5.7.3",
-    "mongoose-type-url": "^1.0.6",
-    "mongoose-validator": "^2.1.0"
+    "mongodb": "^3.3.3",
+    "mongoose": "^5.7.7",
+    "mongoose-validator": "^2.1.0",
+    "validator": "^12.0.0",
+    "winston": "^3.2.1"
   }
 }
